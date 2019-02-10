@@ -1,0 +1,334 @@
+{
+	// Variables
+
+	"New variable": {
+		"prefix": "ni",
+		"body": "$1 $2 = new $1();\n$0",
+		"description": "Construct a new variable and assign the result to a variable"
+	},
+	"New variable with params": {
+		"prefix": "ni",
+		"body": "$1 $2 = new $1($0);",
+		"description": "Construct a new variable and assign the result to a variable"
+	},
+
+	// SOQL
+
+	"Database dynamic SOQL to a list": {
+		"prefix": "soqld",
+		"body": [
+			"List<$1> $2 = (List<$1>) Database.query($3);\n$0"
+		],
+		"description": "Dynamic SOQL to list"
+	},
+	"SOQL assign to list": {
+		"prefix": "sqv",
+		"body": "List<$1> $2 = [\n\tSELECT\n\tId\n\t,$0\n\tFROM $1\n];\n",
+		"description": "SOQL query assignment to List variable"
+	},
+	"SOQL assign to map": {
+		"prefix": "sqm",
+		"body": "Map<Id, $1> $2 = new Map<Id, $1>([\n\tSELECT\n\tId\n\tFROM $1\n]);\n$0",
+		"description": "SOQL query assignment to Map variable"
+	},
+	"Iterate SOQL result": {
+		"prefix": "sqit",
+		"body": "for ($1 $2 : [\n\tSELECT\n\tId\n\tFROM $1\n\t]\n\t) {\n\t$0\n}",
+		"description": "Iterate SOQL query results"
+	},
+
+	// Checks
+
+	"Instance check": {
+		"prefix": "instt",
+		"body": "if ($3 instanceof $1) {\n\t$1 $2 = ($1) $3;\n\t$0\n}",
+		"description": "Checks object type with instanceof and down-casts it"
+	},
+	"if": {
+		"prefix": "if",
+		"body": "if ($1) {\n\t$0\n}",
+		"description": "if"
+	},
+	"Check if map contains a key and then get it": {
+		"prefix": "ifmg",
+		"body": "if ($1.containsKey($2)) {\n\t$3 $2 = $1.get($2);\n\t$0\n}\n\n}",
+		"description": "If map contains key then get"
+	},
+	"Check if map contains key": {
+		"prefix": "ifm",
+		"body": "if ($1.containsKey($2)) {\n\t$0\n}\n\n}",
+		"description": "If map contains key"
+	},
+	"Check if map contains key, and do otherwise": {
+		"prefix": "mife",
+		"body": "if ($1.containsKey($2)) {\n\t$3\n} else {\n\t$0\n}",
+		"description": "Map contains key if / else"
+	},
+
+	// JSON things
+
+	"Deserialize JSON string to a map": {
+		"prefix": "JSON to map",
+		"body": "Map<String, Object> $1 = (Map<String, Object>) JSON.deserializeUntyped($0);",
+		"description": "Deserialize a JSON string into a new Map and assign the result to a variable"
+	},
+	"Deserialize JSON": {
+		"prefix": "JSON deserialize",
+		"body": "$1 $2 = ($1) JSON.deserialize($3, $1.class);\n$0",
+		"description": "Deserialize a JSON string into a new Map and assign the result to a variable"
+	},
+	"Serialize and debug": {
+		"prefix": "JSON serialize pretty",
+		"body": "System.debug(JSON.serializePretty($1));\n$0",
+		"description": "JSON serialize pretty"
+	},
+	"JSON Serialize": {
+		"prefix": "JSON serialize",
+		"body": "JSON.serializePretty($0)",
+		"description": "JSON serialize pretty"
+	},
+	"JSON Serialize pretty": {
+		"prefix": "JSON serialize pretty",
+		"body": "JSON.serializePretty($0)",
+		"description": "JSON serialize pretty"
+	},
+
+	// Debugging
+
+	"System debug with logging level": {
+		"prefix": "debug with logging level",
+		"body": "System.debug(LoggingLevel.$1, $2);\n$0",
+		"description": "Debug logging with System.debug()"
+	},
+
+	// Comment
+
+	"Doc comment": {
+		"prefix": "comment doc",
+		"body": "/**\n * $0\n */",
+		"description": "Doc Comment"
+	},
+
+	// Misc
+
+	"Read/write property getter and setter": {
+		"prefix": "prwf",
+		"body": "{ \n\tget {\n\t\t$1\n\t}\n\tset {\n\t\t$2\n\t}\n}$0",
+		"description": "Read / write property getter and setter"
+	},
+	"Throw AuraHandledException": {
+		"prefix": "tahe",
+		"body": "throw new AuraHandledException($0);",
+		"description": "Throw AuraHandledException"
+	},
+	"New HTTP request": {
+		"prefix": "http request",
+		"body": [
+			"HttpRequest $3 = new HttpRequest();",
+			"$3.setMethod($1);",
+			"$3.setEndpoint($2);",
+			"HttpResponse $4 = new Http().send($3);",
+			"$0"
+		],
+		"description": "Generate new HTTP request code"
+	},
+
+	// Method generation
+
+	"Create private method": {
+		"prefix": "private method",
+		"body": "private $1 $2 ($3) {\n\t$0\n}\n",
+		"description": "Create private method"
+	},
+	"Create private static method": {
+		"prefix": "private static method",
+		"body": "private static $1 $2 ($3) {\n\t$0\n}\n",
+		"description": "Create private static method"
+	},
+	"Create private static method with a comment": {
+		"prefix": "private static method with comment",
+		"body": "/**\n * $4\n */\nprivate static $1 $2 ($3) {\n\t$0\n}\n",
+		"description": "Create private static method with comment"
+	},
+	"Create a private method with a comment": {
+		"prefix": "private method with comment",
+		"body": "/**\n * $4\n */\nprivate $KEYWORD$ $1 $2 ($3) {\n\t$0\n}\n",
+		"description": "Create private method with comment"
+	},
+	"Create a public static method": {
+		"prefix": "public static method",
+		"body": "public static $1 $2 ($3) {\n\t$0\n}\n\n",
+		"description": "Create public static method"
+	},
+	"Create a public method": {
+		"prefix": "public method",
+		"body": "public $1 $2 ($3) {\n\t$0\n}\n",
+		"description": "Create public method"
+	},
+
+	// Testing
+
+	"Create test method with comment": {
+		"prefix": "testmethodwithcomments",
+		"body": "/**\n * $2\n */\n@IsTest\nstatic void $1 () {\n\t$0\n}\n",
+		"description": "Create test method with comment"
+	},
+	"Create test method without comment": {
+		"prefix": "testmethod",
+		"body": "@IsTest\nstatic void $2 () {\n\t$0\n}\n",
+		"description": "Create test method"
+	},
+	"Create test setup method": {
+		"prefix": "testsetup",
+		"body": "@TestSetup static void makeData () {\n\t$0\n}\n",
+		"description": "Create test setup method"
+	},
+	"Start/stop test methods": {
+		"prefix": "testtags",
+		"body": "Test.startTest();\n$0\nTest.stopTest();",
+		"description": "Test's start/stop static methods"
+	},
+	"Create test with HttpCalloutMock": {
+		"prefix": "testhttpcalloutmock",
+		"body": [
+			"Test.setMock(HttpCalloutMock.class, new $1());",
+			"Test.startTest();",
+			"$0",
+			"Test.stopTest();"
+		],
+		"description": "Provide an implementation for the HttpCalloutMock interface to specify the response sent in the respond method, which the Apex runtime calls to send a response for a callout."
+	},
+
+	// More advanced snippets below
+
+	// Database inserts
+
+	"Database insert single record": {
+		"prefix": "insert",
+		"body": [
+			"Database.SaveResult $1 = Database.insert($2, $3);",
+			"if ($1.isSuccess()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Adds an sObject, such as an individual account or contact, to your organization's data."
+	},
+	"Database insert with iteration of results": {
+		"prefix": "insert",
+		"body": [
+			"List<Database.SaveResult> $1 = Database.insert($2, $3);",
+			"for (Database.SaveResult sr : $1) {",
+			"\tif (result.isSuccess()) {",
+			"\t\t$0",
+			"\t} else {",
+			"\t\t",
+			"\t}",
+			"}"
+		],
+		"description": "Insert and iterate over SaveResults"
+	},
+
+	// Database updates
+
+	"Database update single record": {
+		"prefix": "update",
+		"body": [
+			"Database.SaveResult $1 = Database.update($2, $3);",
+			"if ($1.isSuccess()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Adds an sObject, such as an individual account or contact, to your organization's data."
+	},
+	"Database update with iteration of results": {
+		"prefix": "update",
+		"body": [
+			"List<Database.SaveResult> $1 = Database.update($2, $3);",
+			"for (Database.SaveResult sr : $1) {",
+			"\tif (result.isSuccess()) {",
+			"\t\t$0",
+			"\t} else {",
+			"\t\t",
+			"\t}",
+			"}"
+		],
+		"description": "Modifies one or more existing sObject records, such as individual accounts or contactsinvoice statements, in your organization’s data."
+	},
+
+	// Database upserts
+
+	"Database upsert single record": {
+		"prefix": "upsert",
+		"body": [
+			"Database.UpsertResult $1 = Database.upsert($2, $3, $4);",
+			"if ($1.isSuccess()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "upserts an existing sObject record, such as an individual account or contact, from your organization's data."
+	},
+	"Database upsert with iteration of results": {
+		"prefix": "upsert",
+		"body": [
+			"List<Database.UpsertResult> $1 = Database.upsert($2, $3, $4);",
+			"for (Database.UpsertResult ur : $1) {",
+			"\tif (result.isSuccess()) {",
+			"\t\t$0",
+			"\t} else {",
+			"\t\t",
+			"\t}",
+			"}"
+		],
+		"description": "Deletes a list of existing sObject records, such as individual accounts or contacts, from your organization’s data."
+	},
+
+	// Database deletes
+
+	"Database delete single record": {
+		"prefix": "delete",
+		"body": [
+			"Database.DeleteResult $1 = Database.delete($2, $3);",
+			"if ($1.isSuccess()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Deletes an existing sObject record, such as an individual account or contact, from your organization's data."
+	},
+	"Database delete with iteration of results": {
+		"prefix": "delete",
+		"body": [
+			"List<Database.DeleteResult> $1 = Database.delete($2, $3);",
+			"for (Database.DeleteResult dr : $1) {",
+			"\tif (result.isSuccess()) {",
+			"\t\t$0",
+			"\t} else {",
+			"\t\t",
+			"\t}",
+			"}"
+		],
+		"description": "Deletes a list of existing sObject records, such as individual accounts or contacts, from your organization’s data."
+	},
+
+	"Copyright": {
+		"prefix": "copyright",
+		"body": "Copyright $CURRENT_YEAR Renato Oliveira",
+		"description": "Copyright"
+	},
+
+	"List to map based on criteria": {
+		"prefix": "maplc",
+		"body": [
+			"public $1 Map<$2, $3> $7 ($4 $5) {",
+			"\tMap<$2, $3> result = new Map<$2, $3>();",
+			"\tfor ($4 r : $5) {",
+			"\t\tif (!result.containsKey($6)) {",
+			"\t\t\tresult.put($6, new $3());",
+			"\t\t}",
+			"\t\t$0",
+			"\t}",
+			"\treturn result;",
+			"}"
+		],
+		"description": "Generates a method to iterate a list of records and return a map based on some criteira."
+	}
+}
