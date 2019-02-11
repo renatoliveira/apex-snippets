@@ -50,18 +50,34 @@
 		"description": "if"
 	},
 	"Check if map contains a key and then get it": {
-		"prefix": "ifmg",
-		"body": "if ($1.containsKey($2)) {\n\t$3 $2 = $1.get($2);\n\t$0\n}\n\n}",
+		"prefix": "if map contains key, and get it",
+		"body": [
+			"if (${1:map}.containsKey(${2:key})) {",
+			"\t${3:keyType} ${4:keyName} = ${1:map}.get(${2:key});",
+			"\t$0",
+			"}"
+		],
 		"description": "If map contains key then get"
 	},
 	"Check if map contains key": {
-		"prefix": "ifm",
-		"body": "if ($1.containsKey($2)) {\n\t$0\n}\n\n}",
+		"prefix": "if map contains key",
+		"body": [
+			"if (${1:map}.containsKey(${2:key})) {",
+			"\t$0",
+			"}"
+		],
 		"description": "If map contains key"
 	},
 	"Check if map contains key, and do otherwise": {
-		"prefix": "mife",
-		"body": "if ($1.containsKey($2)) {\n\t$3\n} else {\n\t$0\n}",
+		"prefix": "if map contains key and else",
+		"body": [
+			"if (${1:map}.containsKey(${2:key})) {",
+			"\t${3://what to do if the map contains the key...}",
+			"} else {",
+			"\t${4://what else?}",
+			"}",
+			"$0"
+		],
 		"description": "Map contains key if / else"
 	},
 
