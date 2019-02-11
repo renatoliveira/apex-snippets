@@ -81,6 +81,36 @@
 		"description": "Map contains key if / else"
 	},
 
+	// Loops
+
+	"Iterate a list of objects with a for-loop": {
+		"prefix": "for iterator for list",
+		"body": [
+			"for (${1:type} ${2:var} : ${3:list}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Iteration over a list of objects"
+	},
+	"Iterate a map of objects with a for-loop": {
+		"prefix": "for iterator for map values",
+		"body": [
+			"for (${1:type} ${2:object} : ${3:map}.keySet()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Iteration over a list of objects in a map's values"
+	},
+	"Iterate a map by the key": {
+		"prefix": "for iterator for map keys",
+		"body": [
+			"for (${1:type} ${2:key} : ${3:map}.keySet()) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Iteration over a list of objects in a map's values"
+	},
+
 	// JSON things
 
 	"Deserialize JSON string to a map": {
@@ -100,12 +130,12 @@
 	},
 	"JSON Serialize": {
 		"prefix": "JSON serialize",
-		"body": "JSON.serializePretty($0)",
+		"body": "JSON.serializePretty(${0:jsonObject})",
 		"description": "JSON serialize pretty"
 	},
 	"JSON Serialize pretty": {
 		"prefix": "JSON serialize pretty",
-		"body": "JSON.serializePretty($0)",
+		"body": "JSON.serializePretty(${0:jsonObject})",
 		"description": "JSON serialize pretty"
 	},
 
@@ -113,7 +143,7 @@
 
 	"System debug with logging level": {
 		"prefix": "debug with logging level",
-		"body": "System.debug(LoggingLevel.$1, $2);\n$0",
+		"body": "System.debug(LoggingLevel.${1|NONE,ERROR,WARN,INFO,DEBUG,FINE,FINER,FINEST|}, $2);\n$0",
 		"description": "Debug logging with System.debug()"
 	},
 
