@@ -110,6 +110,24 @@
 		],
 		"description": "Iteration over a list of objects in a map's values"
 	},
+	"Iterate trigger objects (with cast)": {
+		"prefix": "iterate trigger records (with cast on list)",
+		"body": [
+			"for (${1:SObjectType} record : (List<${1:SObjectType}>) Trigger.${2|new,old|}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Iterate over a list of records on a trigger."
+	},
+	"Iterate trigger objects": {
+		"prefix": "iterate trigger records",
+		"body": [
+			"for (${1:SObjectType} record : Trigger.${2|new,old|}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Iterate over a list of records on a trigger."
+	},
 
 	// JSON things
 
