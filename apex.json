@@ -233,34 +233,48 @@
 	// Testing
 
 	"Create test method with comment": {
-		"prefix": "testmethodwithcomments",
+		"prefix": "test method with comments",
 		"body": "/**\n * $2\n */\n@IsTest\nstatic void $1 () {\n\t$0\n}\n",
 		"description": "Create test method with comment"
 	},
 	"Create test method without comment": {
-		"prefix": "testmethod",
+		"prefix": "test method",
 		"body": "@IsTest\nstatic void $2 () {\n\t$0\n}\n",
 		"description": "Create test method"
 	},
 	"Create test setup method": {
-		"prefix": "testsetup",
+		"prefix": "test setup",
 		"body": "@TestSetup static void makeData () {\n\t$0\n}\n",
 		"description": "Create test setup method"
 	},
 	"Start/stop test methods": {
-		"prefix": "testtags",
+		"prefix": "test tags",
 		"body": "Test.startTest();\n$0\nTest.stopTest();",
 		"description": "Test's start/stop static methods"
 	},
 	"Create test with HttpCalloutMock": {
-		"prefix": "testhttpcalloutmock",
+		"prefix": "HttpCalloutMock test start and stop",
 		"body": [
 			"Test.setMock(HttpCalloutMock.class, new $1());",
 			"Test.startTest();",
 			"$0",
 			"Test.stopTest();"
 		],
-		"description": "Provide an implementation for the HttpCalloutMock interface to specify the response sent in the respond method, which the Apex runtime calls to send a response for a callout."
+		"description": "Provides an implementation for the HttpCalloutMock interface to specify the response sent in the respond method, which the Apex runtime calls to send a response for a callout."
+	},
+	"Create test class body": {
+		"prefix": "create test class body",
+		"body": [
+			"@IsTest",
+			"private class ${1:class name} {",
+			"",
+			"\t@IsTest",
+			"\tstatic void ${2:testMethod}() {",
+			"\t\t$0",
+			"\t}",
+			"}"
+		],
+		"description": "Provides a small class body for a test class."
 	},
 
 	// More advanced snippets below
