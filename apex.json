@@ -408,5 +408,29 @@
 			"}"
 		],
 		"description": "Generates a method to iterate a list of records and return a map based on some criteira."
+	},
+
+	// batch class snippet
+
+	"Batch class snippet": {
+		"prefix": "batch class model",
+		"body": [
+			"global class ${2:BatchClassName} implements Database.Batchable<${1:SObject}> {",
+			"\t",
+			"\tglobal Iterable<${1:SObject}> start (Database.BatchableContext bc) {",
+			"\t\t// return SOQL",
+			"\t}",
+			"",
+			"\tglobal void execute (Database.BatchableContext bc, List<${1:SObject}> scope) {",
+			"\t\t// execution",
+			"\t\t$0",
+			"\t}",
+			"",
+			"\tglobal void finish (Database.BatchableContext bc) {",
+			"\t\t// finish",
+			"\t}",
+			"}"
+		],
+		"description": "Generate a batch class model"
 	}
 }
