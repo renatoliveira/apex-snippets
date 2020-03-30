@@ -276,6 +276,40 @@
 		],
 		"description": "Provides a small class body for a test class."
 	},
+	"Create new user": {
+		"prefix": "new User",
+		"body": [
+			"User ${0:u} = new User(",
+			"\tAlias = ${1:'alias'},",
+			"\tEmail=${5:'standarduser@testorg.com'},",
+			"\tEmailEncodingKey='UTF-8',",
+			"\tLastName=${3:'LastName'},",
+			"\tLanguageLocaleKey='en_US',",
+			"\tLocaleSidKey='en_US',",
+			"\tProfileId = ${4|profileId,UserInfo.getProfileId()|},",
+			"\tTimeZoneSidKey='America/Los_Angeles',",
+			"\tUserName='user' + System.now().getTime() + '@testorg.com'",
+			");",
+			"insert ${0:u};"
+		],
+		"description": "Create a new user with required fields."
+	},
+	"Assign permission sets": {
+		"prefix": "assign multiple permission sets",
+		"body": [
+			"List<String> permissionSetsNames = new List<String>{ $1 };",
+			"List<PermissionSetAssignment> assignments = new List<PermissionSetAssignment>();",
+			"",
+			"for (PermissionSet ps : [SELECT Id FROM PermissionSet WHERE Name IN :permissionSetsNames]) {",
+			"\tPermissionSetAssignment psa = new PermissionSetAssignment();",
+			"\tpsa.AssigneeId = $2;",
+			"\tpsa.PermissionSetId = ps.Id;",
+			"\tassignments.add(psa);",
+			"}",
+			"insert assignments;"
+		],
+		"description": "Assign multiple permission sets searched by Name to a user."
+	},
 
 	// More advanced snippets below
 
