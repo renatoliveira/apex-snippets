@@ -423,7 +423,7 @@
 
 	"Copyright": {
 		"prefix": "copyright",
-		"body": "Copyright $CURRENT_YEAR Renato Oliveira",
+		"body": "Copyright $CURRENT_YEAR $0",
 		"description": "Copyright"
 	},
 
