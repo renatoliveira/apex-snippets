@@ -435,7 +435,7 @@
 	"List to map based on criteria": {
 		"prefix": "maplc",
 		"body": [
-			"public $1 Map<$2, $3> $7 ($4 $5) {",
+			"${8|public,private,global|} $1 Map<$2, $3> $7 ($4 $5) {",
 			"\tMap<$2, $3> result = new Map<$2, $3>();",
 			"\tfor ($4 r : $5) {",
 			"\t\tif (!result.containsKey($6)) {",
