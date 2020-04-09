@@ -310,9 +310,14 @@
 		],
 		"description": "Assign multiple permission sets searched by Name to a user."
 	},
+	"Assert object access": {
+		"prefix": "assert object access",
+		"body": "System.assert(Schema.SObjectType.${1:object API name}.isAccessible(), 'User should have access to the object ${1:object API name}.');",
+		"description": "Asserts the current user has access to a field."
+	},
 	"Assert field access": {
 		"prefix": "assert field access",
-		"body": "System.assert(Schema.SObjectType.${1:object API name}.fields.${2:field API name}.isAccessible(), 'User should have access to the following field: ${1:object API name}.' + Schema.SObjectType.${1:object API name}.fields.${2:field API name}.getLocalName());",
+		"body": "System.assert(Schema.SObjectType.${1:object API name}.fields.${2:field API name}.isAccessible(), 'User should have access to the field: ${1:object API name}.' + Schema.SObjectType.${1:object API name}.fields.${2:field API name}.getLocalName());",
 		"description": "Asserts the current user has access to a field."
 	},
 
