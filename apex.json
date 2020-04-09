@@ -471,5 +471,12 @@
 			"}"
 		],
 		"description": "Generate a batch class model"
+	},
+
+	// Get record type by Developer Name
+	"Get record type Id by developer name": {
+		"prefix": "get record type by dev name",
+		"body": "Schema.$1.getDescribe().getSObjectType().getRecordTypeInfosByDeveloperName().get('$2').getRecordTypeId()",
+		"description": "Query the Schema for the record type id."
 	}
 }
