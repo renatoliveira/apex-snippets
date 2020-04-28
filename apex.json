@@ -319,18 +319,18 @@
 	"Create new user": {
 		"prefix": "new User",
 		"body": [
-			"User ${0:u} = new User(",
-			"\tAlias = ${1:'alias'},",
-			"\tEmail=${5:'standarduser@testorg.com'},",
+			"User ${5:newUser} = new User(",
+			"\tAlias = '${1:alias}',",
+			"\tEmail='${5:standarduser@testorg.com}',",
 			"\tEmailEncodingKey='UTF-8',",
-			"\tLastName=${3:'LastName'},",
+			"\tLastName='${3:LastName}',",
 			"\tLanguageLocaleKey='en_US',",
 			"\tLocaleSidKey='en_US',",
 			"\tProfileId = ${4|profileId,UserInfo.getProfileId()|},",
 			"\tTimeZoneSidKey='America/Los_Angeles',",
 			"\tUserName='user' + System.now().getTime() + '@testorg.com'",
 			");",
-			"insert ${0:u};"
+			"insert ${5:newUser};$0"
 		],
 		"description": "Create a new user with required fields."
 	},
