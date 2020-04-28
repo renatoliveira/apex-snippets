@@ -14,10 +14,33 @@
 
 	// SOQL
 
+	"SOQL template with clause": {
+		"prefix": "soql template with clause",
+		"body": [
+			"[",
+			"\tSELECT",
+			"\t${1:field}",
+			"\tFROM ${2:object}",
+			"\tWHERE ${3:where}",
+			"];"
+		],
+		"description": "A basic SOQL template with WHERE clause."
+	},
+	"SOQL template without clause": {
+		"prefix": "soql template without clause",
+		"body": [
+			"[",
+			"\tSELECT",
+			"\t${1:field}",
+			"\tFROM ${2:object}",
+			"];"
+		],
+		"description": "A basic SOQL template without WHERE clause."
+	},
 	"Database dynamic SOQL to a list": {
 		"prefix": "soqld",
 		"body": [
-			"List<$1> $2 = (List<$1>) Database.query($3);\n$0"
+			"List<$1> $2 = (List<$1>) Database.query($3);"
 		],
 		"description": "Dynamic SOQL to list"
 	},
