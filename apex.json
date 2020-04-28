@@ -198,6 +198,15 @@
 
 	// Misc
 
+	"Run as": {
+		"prefix": "runas",
+		"body": [
+			"System.runAs($1) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Run test as another user."
+	},
 	"Read/write property getter and setter": {
 		"prefix": "prwf",
 		"body": "{ \n\tget {\n\t\t$1\n\t}\n\tset {\n\t\t$2\n\t}\n}$0",
