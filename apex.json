@@ -518,10 +518,55 @@
 		"description": "Generate a batch class model"
 	},
 
-	// Get record type by Developer Name
+	// Schema
 	"Get record type Id by developer name": {
 		"prefix": "get record type by dev name",
-		"body": "Schema.$1.getDescribe().getSObjectType().getRecordTypeInfosByDeveloperName().get('$2').getRecordTypeId()",
+		"body": "Schema.$1.getSObjectType().getDescribe().getRecordTypeInfosByDeveloperName().get('$2').getRecordTypeId()",
 		"description": "Query the Schema for the record type id."
+	},
+	"Generate record Id": {
+		"prefix": "generate record id",
+		"body": [
+			"Schema.${1:SObjectApiName}.getSObjectType().getDescribe().getKeyPrefix() + '010000000000AAA'"
+		],
+		"description": "generates a simple record Id"
+	},
+
+	"Batch class summary status code errors": {
+		"prefix": "Save result summary errors by status code",
+		"body": [
+			"Integer ${1:successs} = 0;",
+			"Integer ${2:errors} = 0;",
+			"",
+			"Map<System.StatusCode, Integer> ${3:errorCount} = new Map<System.StatusCode, Integer>();",
+			"",
+			"for (Database.SaveResult sr : Database.update(records, false)) {",
+			"\tif (!sr.isSuccess()) {",
+			"\t\tfor (Database.Error err : sr.getErrors()) {",
+			"\t\t\tSystem.StatusCode code = err.getStatusCode();",
+			"\t\t\tif (code == System.StatusCode.INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST) {",
+			"\t\t\t\tSystem.debug(LoggingLevel.ERROR, sr.getErrors());",
+			"\t\t\t}",
+			"\t\t\tif (${3:errorCount}.containsKey(code)) {",
+			"\t\t\t\tInteger errCount = ${3:errorCount}.get(code);",
+			"\t\t\t\t${3:errorCount}.put(code, errCount + 1);",
+			"\t\t\t} else {",
+			"\t\t\t\t${3:errorCount}.put(code, 1);",
+			"\t\t\t}",
+			"\t\t}",
+			"\t\t${2:errors}++;",
+			"\t} else {",
+			"\t\t${1:successs}++;",
+			"\t}",
+			"}",
+			"",
+			"System.debug(LoggingLevel.INFO, '${1:successs}: ' + ${1:successs});",
+			"System.debug(LoggingLevel.INFO, '${2:errors}: ' + ${2:errors});",
+			"",
+			"for (System.StatusCode code : ${3:errorCount}.keySet()) {",
+			"\tSystem.debug(LoggingLevel.INFO, code + ' : ' + ${3:errorCount}.get(code));",
+			"}"
+		],
+		"description": "Handles a Database.SaveResult array and gets its errors in a summary displayed on the logs."
 	}
 }
