@@ -228,6 +228,14 @@
 		],
 		"description": "Generate new HTTP request code"
 	},
+	"Regex expression": {
+		"prefix": "regex",
+		"body": [
+			"Pattern ${1:thePattern} = Pattern.compile('${2:pattern}');",
+			"Matcher ${3:theMatcher} = ${1:thePattern}.matcher(body);"
+		],
+		"description": "Base code for a regex matcher"
+	},
 
 	// Method generation
 
