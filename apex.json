@@ -3,7 +3,7 @@
 
 	"New variable": {
 		"prefix": "ni",
-		"body": "$1 $2 = new $1();\n$0",
+		"body": "$1 $2 = new $1();",
 		"description": "Construct a new variable and assign the result to a variable"
 	},
 	"New variable with params": {
@@ -51,7 +51,7 @@
 	},
 	"SOQL assign to map": {
 		"prefix": "sqm",
-		"body": "Map<Id, $1> $2 = new Map<Id, $1>([\n\tSELECT\n\tId\n\tFROM $1\n]);\n$0",
+		"body": "Map<Id, $1> $2 = new Map<Id, $1>([\n\tSELECT\n\tId\n\tFROM $1\n]);",
 		"description": "SOQL query assignment to Map variable"
 	},
 	"Iterate SOQL result": {
@@ -161,12 +161,12 @@
 	},
 	"Deserialize JSON": {
 		"prefix": "JSON deserialize",
-		"body": "$1 $2 = ($1) JSON.deserialize($3, $1.class);\n$0",
+		"body": "$1 $2 = ($1) JSON.deserialize($3, $1.class);",
 		"description": "Deserialize a JSON string into a new Map and assign the result to a variable"
 	},
 	"Serialize and debug": {
 		"prefix": "JSON serialize pretty",
-		"body": "System.debug(JSON.serializePretty($1));\n$0",
+		"body": "System.debug(JSON.serializePretty($1));",
 		"description": "JSON serialize pretty"
 	},
 	"JSON Serialize": {
@@ -184,7 +184,7 @@
 
 	"System debug with logging level": {
 		"prefix": "debug with logging level",
-		"body": "System.debug(LoggingLevel.${1|NONE,ERROR,WARN,INFO,DEBUG,FINE,FINER,FINEST|}, $2);\n$0",
+		"body": "System.debug(LoggingLevel.${1|NONE,ERROR,WARN,INFO,DEBUG,FINE,FINER,FINEST|}, $2);$0",
 		"description": "Debug logging with System.debug()"
 	},
 
@@ -289,7 +289,7 @@
 	},
 	"Start/stop test methods": {
 		"prefix": "test tags",
-		"body": "Test.startTest();\n$0\nTest.stopTest();",
+		"body": "Test.startTest();\nTest.stopTest();",
 		"description": "Test's start/stop static methods"
 	},
 	"Create test with HttpCalloutMock": {
